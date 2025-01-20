@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+## [0.2.6] - 2025-01-20
+
 ### Changed
 - Rename repository to `nps`
 
@@ -125,7 +127,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Versioning now adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.5...development
+[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.6...development
+[0.2.6]: https://github.com/OleMussmann/nps/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/OleMussmann/nps/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/OleMussmann/nps/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/OleMussmann/nps/compare/v0.2.2...v0.2.3
