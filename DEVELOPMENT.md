@@ -72,7 +72,7 @@ GitHub.com does not allow for fast-forward merges on the web UI. This means that
 ### Setup
 1. Abuse "Setting -> General -> Pull Requests" and "Settings -> Rules -> Ruleset (main)" to create conflicting requirements for the `main` branch. This disables merging on the web UI. See: https://github.com/orgs/community/discussions/4618#discussioncomment-11652479
 
-1. Instead, use GitHub actions to fast-worward merge. See https://github.com/sequoia-pgp/fast-forward for details.
+1. Instead, use GitHub actions to fast-forward merge. See https://github.com/sequoia-pgp/fast-forward for details.
 
 ### Usage
-After all tests have passed, comment `/fast-worward` in the PR discussions.
+After all tests have passed, comment `/fast-forward` in the PR discussions.
