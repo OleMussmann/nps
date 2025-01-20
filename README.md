@@ -1,6 +1,6 @@
-[![Testing CI](https://github.com/OleMussmann/Nix-Package-Search/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/OleMussmann/Nix-Package-Search/actions/workflows/test.yml) [![CodeCov](https://codecov.io/gh/OleMussmann/Nix-Package-Search/graph/badge.svg?token=1QLZ9AG8N1)](https://codecov.io/gh/OleMussmann/Nix-Package-Search)
+[![Testing CI](https://github.com/OleMussmann/nps/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/OleMussmann/nps/actions/workflows/test.yml) [![CodeCov](https://codecov.io/gh/OleMussmann/nps/graph/badge.svg?token=1QLZ9AG8N1)](https://codecov.io/gh/OleMussmann/nps)
 
-# Nix-Package-Search
+# Nix Package Search - `nps`
 Cache the nix package list, query and sort by relevance.
 
 Find installable packages at lightning speed and sort the result by relevance, split by ...
@@ -17,12 +17,12 @@ Find installable packages at lightning speed and sort the result by relevance, s
 ### Try It Without Installing
 #### Flakes ❄️
 ```bash
-nix run github:OleMussmann/Nix-Package-Search -- COMMAND_LINE_OPTIONS
+nix run github:OleMussmann/nps -- COMMAND_LINE_OPTIONS
 ```
 
 #### No Flakes ☀️
 ```bash
-nix --extra-experimental-features "nix-command flakes" run github:OleMussmann/Nix-Package-Search -- COMMAND_LINE_OPTIONS
+nix --extra-experimental-features "nix-command flakes" run github:OleMussmann/nps -- COMMAND_LINE_OPTIONS
 ```
 
 ### Declarative Installation (Recommended)
@@ -35,7 +35,8 @@ Add `nps` to your inputs:
 inputs = {
   nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
-  nps.url = "github:OleMussmann/Nix-Package-Search";
+  # Nix Package Search - nps
+  nps.url = "github:OleMussmann/nps";
   nps.inputs.nixpkgs.follows = "nixpkgs";
 };
 ```
@@ -76,13 +77,14 @@ Add `nps` to your `systemPackages` in `configuration.nix`:
 ```nix
 environment.systemPackages = with pkgs; [
     other_packages
-    (builtins.getFlake "github:OleMussmann/Nix-Package-Search").packages.${builtins.currentSystem}.nps
+    # Nix Package Search - nps:
+    (builtins.getFlake "github:OleMussmann/nps").packages.${builtins.currentSystem}.nps
     ...
 ];
 ```
 
 ### By Hand
-- Clone this repository and `cd Nix-Package-Search` into it.
+- Clone this repository and `cd nps` into it.
 - Build with `cargo build --release`. Dependencies needed: `gcc`, `cargo`
 - Copy or symlink the `target/release/nps` executable to a folder in your `PATH`, or include it in your `PATH`.
 
