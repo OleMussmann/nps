@@ -7,7 +7,7 @@ Find installable packages at lightning speed and sort the result by relevance, s
 
 - indirect hits - packages that _contain the search string_,
 - direct hits - packages that _start with the search string_,
-- exact hits - the package that _matches your exact string_,
+- exact hits - the package that _matches your exact search string_,
 
 ... in configurable individual colors, optionally separated by a newline. Have a look:
 
@@ -88,8 +88,8 @@ environment.systemPackages = with pkgs; [
 - Build with `cargo build --release`. Dependencies needed: `gcc`, `cargo`
 - Copy or symlink the `target/release/nps` executable to a folder in your `PATH`, or include it in your `PATH`.
 
-## Automate Package Scanning (Optional)
-You can run `nps -r` (or `nps -e -r` for using the nix "experimental" features a.k.a flakes) every once in a while to refresh the package cache, or you can set up a systemd timer at regular intervals. If you automate it, make sure to do so with your local user environment.
+## Automatic Package Scanning (Optional)
+Instead of running `nps -r` (or `nps -e -r` for using the nix "experimental" features a.k.a flakes) by hand every once in a while to refresh the package cache, or you can set up a systemd timer at regular intervals. If you automate it, make sure to do so with your local user environment.
 
 ```nix
 systemd.timers."refresh-nps-cache" = {
@@ -147,16 +147,16 @@ systemd.services."refresh-nps-cache" = {
 - The cache is created on the first call. Be patient, it might take a while. This is done under the hood by capturing the output of `nix-env -qaP`  (or `nix search nixpkgs ^` for "experimental"/flake mode). Subsequent queries are much faster.
 
 ```markdown
-Find SEARCH_TERM in available nix packages and sort results by relevance
+Find SEARCH_TERM in available nix packages and sort results by relevance.
 
 List up to three columns, the latter two being optional:
 PACKAGE_NAME  <PACKAGE_VERSION>  <PACKAGE_DESCRIPTION>
 
-Matches are sorted by type. Show 'exact' matches first, then 'direct' matches, and finally 'indirect' matches.
+Matches are sorted by type. Show 'indirect' matches first, then 'direct' matches, and finally 'exact' matches.
 
-  exact     SEARCH_TERM (in PACKAGE_NAME column)
-  direct    SEARCH_TERMbar (in PACKAGE_NAME column)
-  indirect  fooSEARCH_TERMbar (in any column)
+  indirect  fooSEARCH_TERMbar (SEARCH_TERM appears in any column)
+  direct    SEARCH_TERMbar (PACKAGE_NAME starts with SEARCH_TERM)
+  exact     SEARCH_TERM (PACKAGE_NAME is exactly SEARCH_TERM)
 
 Usage: nps [OPTIONS] [SEARCH_TERM]
 
@@ -193,14 +193,14 @@ Options:
   -e, --experimental[=<EXPERIMENTAL>]
           Use experimental flakes
 
-          [env: NIX_PACKAGE_SEARCH_EXPERIMENTAL=true]
+          [env: NIX_PACKAGE_SEARCH_EXPERIMENTAL=]
           [default: false]
           [possible values: true, false]
 
   -f, --flip[=<FLIP>]
           Flip the order of matches and sorting
 
-          [env: NIX_PACKAGE_SEARCH_FLIP=true]
+          [env: NIX_PACKAGE_SEARCH_FLIP=]
           [default: false]
           [possible values: true, false]
 
@@ -217,6 +217,7 @@ Options:
           [env: NIX_PACKAGE_SEARCH_QUIET=]
           [default: false]
           [possible values: true, false]
+
   -r, --refresh
           Refresh package cache and exit
 

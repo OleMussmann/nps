@@ -40,16 +40,16 @@ const DEFAULTS: Defaults = Defaults {
     indirect_color: Colors::Green,
 };
 
-/// Find SEARCH_TERM in available nix packages and sort results by relevance
+/// Find SEARCH_TERM in available nix packages and sort results by relevance.
 ///
 /// List up to three columns, the latter two being optional:
 /// PACKAGE_NAME  <PACKAGE_VERSION>  <PACKAGE_DESCRIPTION>
 ///
-/// Matches are sorted by type. Show 'exact' matches first, then 'direct' matches, and finally 'indirect' matches.
+/// Matches are sorted by type. Show 'indirect' matches first, then 'direct' matches, and finally 'exact' matches.
 ///
-///   exact     SEARCH_TERM (in PACKAGE_NAME column)
-///   direct    SEARCH_TERMbar (in PACKAGE_NAME column)
-///   indirect  fooSEARCH_TERMbar (in any column)
+///   indirect  fooSEARCH_TERMbar (SEARCH_TERM appears in any column)
+///   direct    SEARCH_TERMbar (PACKAGE_NAME starts with SEARCH_TERM)
+///   exact     SEARCH_TERM (PACKAGE_NAME is exactly SEARCH_TERM)
 #[derive(Parser, Debug)]
 #[command(
     author,
