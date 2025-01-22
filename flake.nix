@@ -42,6 +42,7 @@
               cargo-outdated # check for dependency updates
               cargo-release # help creating releases
               cargo-tarpaulin # code coverage
+              python312Packages.grip # markdown rendering
               hyperfine # benchmarking
               nixfmt-rfc-style # code formatting
               rust-bin.beta.latest.default
