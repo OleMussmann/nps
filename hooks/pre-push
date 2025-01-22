@@ -2,10 +2,17 @@
 
 set -eu
 
-echo "Checking formatting..."
+echo "Checking rust formatting..."
 if ! cargo fmt -- --check
 then
     echo "Check \`cargo fmt\`"
+    exit 1
+fi
+
+echo "Checking nix formatting..."
+if ! nixfmt -c $(find . -name "*.nix")
+then
+    echo "Run \`nixfmt \$(find . -name \"*.nix\")\`"
     exit 1
 fi
 

@@ -9,30 +9,31 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = {
-    self,
-    flake-compat,
-    flake-utils,
-    naersk,
-    nixpkgs,
-    rust-overlay,
-  }:
+  outputs =
+    {
+      self,
+      flake-compat,
+      flake-utils,
+      naersk,
+      nixpkgs,
+      rust-overlay,
+    }:
     flake-utils.lib.eachDefaultSystem (
-      system: let
-        overlays = [(import rust-overlay)];
-        pkgs = import nixpkgs {inherit system overlays;};
-        naersk' = pkgs.callPackage naersk {};
-      in rec
-      {
+      system:
+      let
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs { inherit system overlays; };
+        naersk' = pkgs.callPackage naersk { };
+      in
+      rec {
         defaultPackage = packages.default;
         packages.default = naersk'.buildPackage {
           src = ./.;
-          buildInputs = with pkgs; [
-            nix
-          ];
+          buildInputs = with pkgs; [ nix ];
         };
 
-        devShells.default = with pkgs;
+        devShells.default =
+          with pkgs;
           mkShell {
             buildInputs = [
               alejandra # nix formatting
@@ -42,10 +43,9 @@
               cargo-release # help creating releases
               cargo-tarpaulin # code coverage
               hyperfine # benchmarking
+              nixfmt-rfc-style # code formatting
               rust-bin.beta.latest.default
             ];
-            shellHook = ''
-            '';
           };
       }
     );
