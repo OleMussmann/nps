@@ -241,16 +241,18 @@ Apart from command line flags, `nps` can be configured with environment variable
 
 ```nix
 environment.sessionVariables = {
+    #NIX_PACKAGE_SEARCH_COLOR_MODE = "auto";
+    #NIX_PACKAGE_SEARCH_COLUMNS = "all";
     #NIX_PACKAGE_SEARCH_EXPERIMENTAL = "false";  # Set to "true" for flakes
     #NIX_PACKAGE_SEARCH_FLIP = "false";
+    #NIX_PACKAGE_SEARCH_IGNORE_CASE = "true";
+    #NIX_PACKAGE_SEARCH_PRINT_SEPARATOR = "true";
+    #NIX_PACKAGE_SEARCH_QUIET = "false";
+
     #NIX_PACKAGE_SEARCH_CACHE_FOLDER_ABSOLUTE_PATH = "/home/YOUR_USERNAME/.nix-package-search";
-    #NIX_PACKAGE_SEARCH_COLUMNS = "all";
     #NIX_PACKAGE_SEARCH_EXACT_COLOR = "magenta";
     #NIX_PACKAGE_SEARCH_DIRECT_COLOR = "blue";
     #NIX_PACKAGE_SEARCH_INDIRECT_COLOR = "green";
-    #NIX_PACKAGE_SEARCH_COLOR_MODE = "auto";
-    #NIX_PACKAGE_SEARCH_PRINT_SEPARATOR = "true";
-    #NIX_PACKAGE_SEARCH_IGNORE_CASE = "true";
 };
 ```
 
