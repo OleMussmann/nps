@@ -6,7 +6,6 @@
     flake-utils.url = "github:numtide/flake-utils";
     naersk.url = "github:nix-community/naersk";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
   outputs =
@@ -16,13 +15,11 @@
       flake-utils,
       naersk,
       nixpkgs,
-      rust-overlay,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = import nixpkgs { inherit system; };
         naersk' = pkgs.callPackage naersk { };
       in
       rec {
@@ -41,11 +38,13 @@
               cargo-edit # package management
               cargo-outdated # check for dependency updates
               cargo-release # help creating releases
+              cargo # rust toolchain
               cargo-tarpaulin # code coverage
-              python312Packages.grip # markdown rendering
+              clippy # linting
               hyperfine # benchmarking
               nixfmt-rfc-style # code formatting
-              rust-bin.beta.latest.default
+              python312Packages.grip # markdown rendering
+              rustfmt # code formatting
             ];
           };
       }
