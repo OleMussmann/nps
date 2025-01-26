@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Fixed
+- Improve `README.md` text
+
 ## [0.2.7] - 2025-01-22
 
 ### Fixed
