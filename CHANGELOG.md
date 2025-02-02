@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+## [0.2.9] - 2025-02-02
+
 ### Fixed
 - Fix info text for channels
 
@@ -140,7 +142,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Versioning now adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.8...development
+[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.9...development
+[0.2.9]: https://github.com/OleMussmann/nps/compare/v0.2.8...v0.2.9
 [0.2.8]: https://github.com/OleMussmann/nps/compare/v0.2.7...v0.2.8
 [0.2.7]: https://github.com/OleMussmann/nps/compare/v0.2.6...v0.2.7
 [0.2.6]: https://github.com/OleMussmann/nps/compare/v0.2.5...v0.2.6
