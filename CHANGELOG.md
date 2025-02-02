@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Fixed
+- Fix info text for channels
+
 ## [0.2.8] - 2025-01-26
 
 ### Fixed

@@ -814,7 +814,7 @@ fn refresh(experimental: bool, file_path: &PathBuf, quiet: bool) -> Result<(), B
     if stdout.len() < 10_000 {
         log::warn!("Cache seems too small:");
         log::warn!("> Query returned only {} lines.", stdout.len());
-        if flakes_enabled {
+        if !flakes_enabled {
             log::info!(
                 "> Did you set up your channels yet? See: https://nixos.wiki/wiki/Nix_channels"
             );
