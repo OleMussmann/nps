@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Added
+- Flag `-m` for multi-line output
+- Tests for new flag
+
 ### Fixed
-- Clarify developer documentation
+- Fixes to README.md and DEVELOPMENT.md
 
 ## [0.2.9] - 2025-02-02
 

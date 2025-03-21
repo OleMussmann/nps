@@ -69,7 +69,7 @@ MatchMyDescription   a.b.c  MyTestPackageName appears in my description
 mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
 
 MyTestPackageName3   1.2.1  More test package description
-MyTestPackageName2   1.0.1  
+MyTestPackageName2   1.0.1
 MyTestPackageName1   1.1.0  Another test package description
 
 MyTestPackageName    1.0.0  Test package description
@@ -97,7 +97,7 @@ MatchMyDescription   a.b.c  MyTestPackageName appears in my description
 
 mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
 MyTestPackageName3   1.2.1  More test package description
-MyTestPackageName2   1.0.1  
+MyTestPackageName2   1.0.1
 MyTestPackageName1   1.1.0  Another test package description
 
 MyTestPackageName    1.0.0  Test package description
@@ -121,7 +121,7 @@ fn experimental_output_flip_by_command_line_no_equals() {
     let desired_output = "MyTestPackageName    1.0.0  Test package description
 
 MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1  
+MyTestPackageName2   1.0.1
 MyTestPackageName3   1.2.1  More test package description
 
 mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
@@ -149,7 +149,7 @@ fn experimental_output_flip_by_command_line_equals() {
     let desired_output = "MyTestPackageName    1.0.0  Test package description
 
 MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1  
+MyTestPackageName2   1.0.1
 MyTestPackageName3   1.2.1  More test package description
 
 mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
@@ -177,7 +177,7 @@ fn experimental_output_flip_by_env_var() {
     let desired_output = "MyTestPackageName    1.0.0  Test package description
 
 MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1  
+MyTestPackageName2   1.0.1
 MyTestPackageName3   1.2.1  More test package description
 
 mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
@@ -213,10 +213,10 @@ nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description
 nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
 
 nixos.MyTestPackageName3     1.2.1  More test package description
-nixos.MyTestPackageName2     1.0.1  
+nixos.MyTestPackageName2     1.0.1
 nixos.MyTestPackageName1     1.1.0  Another test package description
 nixpkgs.MyTestPackageName3   1.2.1  More test package description
-nixpkgs.MyTestPackageName2   1.0.1  
+nixpkgs.MyTestPackageName2   1.0.1
 nixpkgs.MyTestPackageName1   1.1.0  Another test package description
 
 nixos.MyTestPackageName      1.0.0  Test package description
@@ -250,11 +250,11 @@ nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description
 
 nixos.mytestpackageName3     3.2.1  More test package description, now with MyTestPackageName
 nixos.MyTestPackageName3     1.2.1  More test package description
-nixos.MyTestPackageName2     1.0.1  
+nixos.MyTestPackageName2     1.0.1
 nixos.MyTestPackageName1     1.1.0  Another test package description
 nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
 nixpkgs.MyTestPackageName3   1.2.1  More test package description
-nixpkgs.MyTestPackageName2   1.0.1  
+nixpkgs.MyTestPackageName2   1.0.1
 nixpkgs.MyTestPackageName1   1.1.0  Another test package description
 
 nixos.MyTestPackageName      1.0.0  Test package description
