@@ -61,7 +61,7 @@ const DEFAULTS: Defaults = Defaults {
 struct Cli {
     // default_value_t: value if flag (or env var) not present
     // default_missing_value: value if flag is present, but has no value
-    //                        needs .num_args(0..N) and .require_equals(true)
+    //                        needs `.num_args(0..N)` and `.require_equals(true)`
     // require_equals: force `--option=val` syntax
     // env: read env var if flag not present
     // takes_values: accept values from command line
@@ -171,7 +171,7 @@ struct Cli {
     )]
     separate: bool,
 
-    /// Search for any SEARCH_TERM in package names, description or versions
+    /// Search for any SEARCH_TERM in package names, description, or versions
     #[arg(
         required_unless_present_any = ["refresh"]
     )]
@@ -480,7 +480,7 @@ fn sort_and_pad_matches(cli: &Cli, raw_matches: String) -> Result<MatchVecs, Box
         version_lengths.push(split_line.get(1).unwrap_or(&"").len());
     }
 
-    // Mininum cell size will be the largest contained string
+    // Minimum cell size will be the largest contained string
     let name_padding = *name_lengths.iter().max().unwrap_or(&0);
     let version_padding = *version_lengths.iter().max().unwrap_or(&0);
 
@@ -491,7 +491,7 @@ fn sort_and_pad_matches(cli: &Cli, raw_matches: String) -> Result<MatchVecs, Box
     for line in raw_matches.lines() {
         let split_line: Vec<&str> = line.splitn(3, ' ').collect();
 
-        #[allow(clippy::get_first)] // supress clippy warning for this block
+        #[allow(clippy::get_first)] // suppress clippy warning for this block
         let name = split_line.get(0).unwrap_or(&"");
         let version = split_line.get(1).unwrap_or(&"");
         let description = split_line.get(2).unwrap_or(&"");
@@ -510,7 +510,7 @@ fn sort_and_pad_matches(cli: &Cli, raw_matches: String) -> Result<MatchVecs, Box
         let converted_search_term = &convert_case(search_term, cli.ignore_case);
         let converted_name = &convert_case(name, cli.ignore_case);
 
-        // Package names from channels are prepended with "nixos." or "nixpgks."
+        // Package names from channels are prepended with "nixos." or "nixpkgs."
         match cli.experimental {
             true => {
                 if converted_name == converted_search_term {
@@ -899,7 +899,7 @@ fn main() -> ExitCode {
 
     log::debug!("Log level set to: {}", log_level);
 
-    // Set a supports-color override based on the variable passed in.
+    // Set a "supports-color" override based on the variable passed in.
     let color_choice = match cli.color {
         clap::ColorChoice::Always => {
             log::debug!("clap::ColorChoice set to Always");
