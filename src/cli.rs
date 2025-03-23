@@ -1,6 +1,5 @@
 use clap::builder::styling::{AnsiColor, Effects, Styles};
 use clap::{ArgAction, Parser, ValueEnum};
-
 use std::{path::PathBuf, str};
 
 /// Find SEARCH_TERM in available nix packages and sort results by relevance.
@@ -155,6 +154,21 @@ pub struct Cli {
     )]
     pub separate: bool,
 
+    /// Separate match types with a newline
+    ///
+    /// Only applicable when --multi-line=false
+    #[arg(
+        short,
+        long,
+        require_equals = true,
+        default_value_t = crate::DEFAULTS.truncate,
+        default_missing_value = "true",
+        num_args = 0..=1,
+        action = ArgAction::Set,
+        env = "NIX_PACKAGE_SEARCH_TRUNCATE"
+    )]
+    pub truncate: bool,
+
     /// Search for any SEARCH_TERM in package names, description, or versions
     #[arg(
         required_unless_present_any = ["refresh"]
@@ -292,6 +306,12 @@ NIX_PACKAGE_SEARCH_MULTI_LINE
   >
     [default: {DEFAULT_MULTI_LINE}]
     [possible values: true, false]
+
+NIX_PACKAGE_SEARCH_TRUNCATE
+  Truncate lines longer than terminal width?
+  > PACKAGE_NAME  PACKAGE_VERSION  PACKAGE_DESC…
+    [default: {DEFAULT_TRUNCATE}]
+    [possible values: true, false]
 ";
 
 /// Supply Styles for colored help output.
@@ -340,6 +360,7 @@ fn option_help_text(help_text: &str) -> String {
             "{DEFAULT_MULTI_LINE}",
             &crate::DEFAULTS.multi_line.to_string(),
         )
+        .replace("{DEFAULT_TRUNCATE}", &crate::DEFAULTS.truncate.to_string())
         .replace(
             "{DEFAULT_PRINT_SEPARATOR}",
             &crate::DEFAULTS.print_separator.to_string(),
@@ -399,6 +420,7 @@ pub struct Defaults<'a> {
     pub multi_line_indent: &'a str,
     pub print_separator: bool,
     pub quiet: bool,
+    pub truncate: bool,
 
     pub exact_color: Colors,
     pub direct_color: Colors,

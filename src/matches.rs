@@ -3,13 +3,15 @@ use grep::{
     regex::RegexMatcherBuilder,
     searcher::SearcherBuilder,
 };
-
 use std::{
     error::Error,
-    io::{self, Write},
+    io::{self, IsTerminal, Write},
     str,
 };
 use termcolor::{Buffer, BufferWriter};
+use terminal_size::{terminal_size, Width};
+use unicode_segmentation::UnicodeSegmentation;
+use unicode_width::UnicodeWidthStr;
 
 use crate::cli;
 
@@ -52,6 +54,37 @@ pub fn get_matches(cli: &cli::Cli, content: &str) -> Result<String, Box<dyn Erro
         .map_err(|err| format!("Can't parse printer string: {err}"))?;
 
     Ok(output)
+}
+
+/// Cut off lines longer than terminal width that would otherwise wrap
+fn truncate_line(line: &str, terminal_width: usize) -> String {
+    let mut string_width = line.width(); // using UnicodeWidthStr
+    if string_width < terminal_width {
+        // line fits on screen
+        return line.to_string();
+    }
+    // graphemes are letters/characters/symbols, see https://en.wikipedia.org/wiki/Grapheme
+    let mut graphemes = UnicodeSegmentation::graphemes(line, true).collect::<Vec<&str>>();
+    // leaving 1 space for the ellipsis '…'
+    while string_width > terminal_width - 1 {
+        graphemes.pop();
+        string_width = graphemes.clone().into_iter().collect::<String>().width();
+    }
+    format!("{}…", graphemes.into_iter().collect::<String>())
+}
+
+/// Call `truncate` on all lines in a (potential multi-line) chunk
+fn truncate(cli: &cli::Cli, lines: &str, terminal_width: usize) -> String {
+    let truncated = lines
+        .lines()
+        .map(|x| truncate_line(x, terminal_width))
+        .collect::<Vec<String>>()
+        .join("\n")
+        .to_string();
+    match cli.multi_line {
+        true => truncated + "\n",
+        false => truncated,
+    }
 }
 
 /// Sort matches into match types and pad the lines to aligned columns
@@ -161,6 +194,26 @@ pub fn format_matches(
                 }
             }
         }
+    }
+
+    // Only truncate if we are actually outputting to a terminal
+    if cli.truncate & io::stdout().is_terminal() {
+        let size = terminal_size();
+        let (Width(terminal_width_u16), _) = size.ok_or("Can't get terminal size")?;
+        let terminal_width: usize = terminal_width_u16.into();
+
+        formatted_matches_exact = formatted_matches_exact
+            .iter()
+            .map(|x| truncate(cli, x, terminal_width))
+            .collect();
+        formatted_matches_direct = formatted_matches_direct
+            .iter()
+            .map(|x| truncate(cli, x, terminal_width))
+            .collect();
+        formatted_matches_indirect = formatted_matches_indirect
+            .iter()
+            .map(|x| truncate(cli, x, terminal_width))
+            .collect();
     }
 
     // Let's have the top results at the bottom by default
@@ -713,5 +766,39 @@ mod tests {
         ) {
             assert_eq!(expect, String::from_utf8(output.into_inner()).unwrap());
         }
+    }
+    #[test]
+    fn test_truncate() {
+        init();
+
+        let cli = cli::Cli::try_parse_from(vec!["nps", "_"]).unwrap();
+        let cli_multi_line = cli::Cli::try_parse_from(vec!["nps", "-m", "_"]).unwrap();
+
+        let width = 10;
+        let lines = "long ascii text";
+        let multi_lines = "short\n\
+                           long ascii text\n\
+                           emoji 👨🏻‍💻👩🏻‍💻\n\
+                           em+1   👨🏻‍💻👩🏻‍💻\n\
+                           hanzi 打酱油\n\
+                           ha-1 打酱油";
+        let expected = "long asci…";
+        let expected_multi_line = "short\n\
+                                   long asci…\n\
+                                   emoji 👨🏻\u{200d}💻…\n\
+                                   em+1   👨🏻\u{200d}💻…\n\
+                                   hanzi 打…\n\
+                                   ha-1 打酱…\n";
+        let truncated = truncate(&cli, lines, width);
+        let truncated_multi_line = truncate(&cli_multi_line, multi_lines, width);
+
+        // The characters might not render well in an editor. Print them
+        // in the terminal to see where it's truncated.
+        println!("{}\n", lines);
+        println!("{}\n", &truncated);
+        println!("{}", &expected);
+
+        assert_eq!(truncated, expected);
+        assert_eq!(truncated_multi_line, expected_multi_line);
     }
 }

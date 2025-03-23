@@ -28,6 +28,7 @@ const DEFAULTS: cli::Defaults = cli::Defaults {
     multi_line_indent: "    ", // not user settable
     print_separator: true,
     quiet: false,
+    truncate: false,
 
     exact_color: cli::Colors::Magenta,
     direct_color: cli::Colors::Blue,

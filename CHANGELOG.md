@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Flag `-m` for multi-line output
-- Tests for new flag
+- Flag `-t` for truncation of long lines
+- Tests for new flags
 
 ### Fixed
 - Fixes to README.md and DEVELOPMENT.md
