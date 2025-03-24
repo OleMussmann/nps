@@ -211,6 +211,18 @@ Options:
           [default: true]
           [possible values: true, false]
 
+  -m, --multi-line[=<MULTI_LINE>]
+          Multi line
+
+          Print search matches on two lines, followed by a newline:
+          > PACKAGE_NAME  PACKAGE_VERSION
+          >     PACKAGE_DESCRIPTION
+          >
+
+          [env: NIX_PACKAGE_SEARCH_MULTI_LINE=]
+          [default: false]
+          [possible values: true, false]
+
   -q, --quiet[=<QUIET>]
           Suppress non-debug messages
 
@@ -224,8 +236,19 @@ Options:
   -s, --separate[=<SEPARATE>]
           Separate match types with a newline
 
+          Only applicable when --multi-line=false
+
           [env: NIX_PACKAGE_SEARCH_PRINT_SEPARATOR=]
           [default: true]
+          [possible values: true, false]
+
+  -t, --truncate[=<TRUNCATE>]
+          Separate match types with a newline
+
+          Only applicable when --multi-line=false
+
+          [env: NIX_PACKAGE_SEARCH_TRUNCATE=]
+          [default: false]
           [possible values: true, false]
 
   -h, --help
@@ -246,8 +269,10 @@ environment.sessionVariables = {
     #NIX_PACKAGE_SEARCH_EXPERIMENTAL = "false";  # Set to "true" for flakes
     #NIX_PACKAGE_SEARCH_FLIP = "false";
     #NIX_PACKAGE_SEARCH_IGNORE_CASE = "true";
+    #NIX_PACKAGE_SEARCH_MULTI_LINE = "false";
     #NIX_PACKAGE_SEARCH_PRINT_SEPARATOR = "true";
     #NIX_PACKAGE_SEARCH_QUIET = "false";
+    #NIX_PACKAGE_SEARCH_TRUNCATE = "false";
 
     #NIX_PACKAGE_SEARCH_CACHE_FOLDER_ABSOLUTE_PATH = "/home/YOUR_USERNAME/.nix-package-search";
     #NIX_PACKAGE_SEARCH_EXACT_COLOR = "magenta";
@@ -320,6 +345,25 @@ Suppress non-debug messages?
 Search ignore capitalization for the search?
 
 - default: true
+- possible values: true, false
+
+
+#### `NIX_PACKAGE_SEARCH_MULTI_LINE`
+Print search matches on multiple lines?
+```
+> PACKAGE_NAME  PACKAGE_VERSION
+>     PACKAGE_DESCRIPTION
+>
+```
+- default: false
+- possible values: true, false
+
+#### `NIX_PACKAGE_SEARCH_TRUNCATE`
+Truncate lines longer than terminal width?
+```
+> PACKAGE_NAME  PACKAGE_VERSION  PACKAGE_DESC…
+```
+- default: false
 - possible values: true, false
 
 ## Contributing
