@@ -63,17 +63,17 @@ fn too_much_debug() {
 fn experimental_output_case_sensitive() {
     init();
 
-    let desired_output =
-        "MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-
-MyTestPackageName3   1.2.1  More test package description
-MyTestPackageName2   1.0.1
-MyTestPackageName1   1.1.0  Another test package description
-
-MyTestPackageName    1.0.0  Test package description
-";
+    let desired_output = "\
+        MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+        MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        \n\
+        MyTestPackageName3   1.2.1  More test package description\n\
+        MyTestPackageName2   1.0.1\n\
+        MyTestPackageName1   1.1.0  Another test package description\n\
+        \n\
+        MyTestPackageName    1.0.0  Test package description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("-i=false")
         .arg("--cache-folder=tests/")
@@ -91,17 +91,18 @@ MyTestPackageName    1.0.0  Test package description
 fn experimental_output() {
     init();
 
-    let desired_output = "MatchMyDescription2  9.8.7  mytestpackageName appears in my description with different capitalization
-MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-
-mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-MyTestPackageName3   1.2.1  More test package description
-MyTestPackageName2   1.0.1
-MyTestPackageName1   1.1.0  Another test package description
-
-MyTestPackageName    1.0.0  Test package description
-";
+    let desired_output = "\
+        MatchMyDescription2  9.8.7  mytestpackageName appears in my description with different capitalization\n\
+        MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+        MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        \n\
+        mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        MyTestPackageName3   1.2.1  More test package description\n\
+        MyTestPackageName2   1.0.1\n\
+        MyTestPackageName1   1.1.0  Another test package description\n\
+        \n\
+        MyTestPackageName    1.0.0  Test package description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("--cache-folder=tests/")
         .arg("--experimental=true")
@@ -118,16 +119,17 @@ MyTestPackageName    1.0.0  Test package description
 fn experimental_output_flip_by_command_line_no_equals() {
     init();
 
-    let desired_output = "MyTestPackageName    1.0.0  Test package description
-
-MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1
-MyTestPackageName3   1.2.1  More test package description
-
-mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-";
+    let desired_output = "\
+        MyTestPackageName    1.0.0  Test package description\n\
+        \n\
+        MyTestPackageName1   1.1.0  Another test package description\n\
+        MyTestPackageName2   1.0.1\n\
+        MyTestPackageName3   1.2.1  More test package description\n\
+        \n\
+        mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("-i=false")
         .arg("-f")
@@ -146,16 +148,17 @@ MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my descriptio
 fn experimental_output_flip_by_command_line_equals() {
     init();
 
-    let desired_output = "MyTestPackageName    1.0.0  Test package description
-
-MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1
-MyTestPackageName3   1.2.1  More test package description
-
-mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-";
+    let desired_output = "\
+        MyTestPackageName    1.0.0  Test package description\n\
+        \n\
+        MyTestPackageName1   1.1.0  Another test package description\n\
+        MyTestPackageName2   1.0.1\n\
+        MyTestPackageName3   1.2.1  More test package description\n\
+        \n\
+        mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("-i=false")
         .arg("-f=true")
@@ -174,16 +177,17 @@ MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my descriptio
 fn experimental_output_flip_by_env_var() {
     init();
 
-    let desired_output = "MyTestPackageName    1.0.0  Test package description
-
-MyTestPackageName1   1.1.0  Another test package description
-MyTestPackageName2   1.0.1
-MyTestPackageName3   1.2.1  More test package description
-
-mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-";
+    let desired_output = "\
+        MyTestPackageName    1.0.0  Test package description\n\
+        \n\
+        MyTestPackageName1   1.1.0  Another test package description\n\
+        MyTestPackageName2   1.0.1\n\
+        MyTestPackageName3   1.2.1  More test package description\n\
+        \n\
+        mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("-i=false");
     cmd.arg("--cache-folder=tests/")
@@ -204,24 +208,24 @@ fn output_case_sensitive() {
 
     // The cache mixes scenarios for nixos-the-OS and nix-the-package-manager. We test for both at
     // the same time.
-    let desired_output =
-        "nixos.MatchMyDescription1    9.8.7  Also here MyTestPackageName appears in my description
-nixos.MatchMyDescription     a.b.c  MyTestPackageName appears in my description
-nixos.mytestpackageName3     3.2.1  More test package description, now with MyTestPackageName
-nixpkgs.MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-
-nixos.MyTestPackageName3     1.2.1  More test package description
-nixos.MyTestPackageName2     1.0.1
-nixos.MyTestPackageName1     1.1.0  Another test package description
-nixpkgs.MyTestPackageName3   1.2.1  More test package description
-nixpkgs.MyTestPackageName2   1.0.1
-nixpkgs.MyTestPackageName1   1.1.0  Another test package description
-
-nixos.MyTestPackageName      1.0.0  Test package description
-nixpkgs.MyTestPackageName    1.0.0  Test package description
-";
+    let desired_output = "\
+        nixos.MatchMyDescription1    9.8.7  Also here MyTestPackageName appears in my description\n\
+        nixos.MatchMyDescription     a.b.c  MyTestPackageName appears in my description\n\
+        nixos.mytestpackageName3     3.2.1  More test package description, now with MyTestPackageName\n\
+        nixpkgs.MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+        nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        \n\
+        nixos.MyTestPackageName3     1.2.1  More test package description\n\
+        nixos.MyTestPackageName2     1.0.1\n\
+        nixos.MyTestPackageName1     1.1.0  Another test package description\n\
+        nixpkgs.MyTestPackageName3   1.2.1  More test package description\n\
+        nixpkgs.MyTestPackageName2   1.0.1\n\
+        nixpkgs.MyTestPackageName1   1.1.0  Another test package description\n\
+        \n\
+        nixos.MyTestPackageName      1.0.0  Test package description\n\
+        nixpkgs.MyTestPackageName    1.0.0  Test package description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("-i=false")
         .arg("--cache-folder=tests/")
@@ -241,25 +245,26 @@ fn output() {
 
     // The cache mixes scenarios for nixos-the-OS and nix-the-package-manager. We test for both at
     // the same time.
-    let desired_output = "nixos.MatchMyDescription2    9.8.7  mytestpackageName appears in my description with different capitalization
-nixos.MatchMyDescription1    9.8.7  Also here MyTestPackageName appears in my description
-nixos.MatchMyDescription     a.b.c  MyTestPackageName appears in my description
-nixpkgs.MatchMyDescription2  9.8.7  mytestpackageName appears in my description with different capitalization
-nixpkgs.MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description
-nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description
-
-nixos.mytestpackageName3     3.2.1  More test package description, now with MyTestPackageName
-nixos.MyTestPackageName3     1.2.1  More test package description
-nixos.MyTestPackageName2     1.0.1
-nixos.MyTestPackageName1     1.1.0  Another test package description
-nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName
-nixpkgs.MyTestPackageName3   1.2.1  More test package description
-nixpkgs.MyTestPackageName2   1.0.1
-nixpkgs.MyTestPackageName1   1.1.0  Another test package description
-
-nixos.MyTestPackageName      1.0.0  Test package description
-nixpkgs.MyTestPackageName    1.0.0  Test package description
-";
+    let desired_output = "\
+        nixos.MatchMyDescription2    9.8.7  mytestpackageName appears in my description with different capitalization\n\
+        nixos.MatchMyDescription1    9.8.7  Also here MyTestPackageName appears in my description\n\
+        nixos.MatchMyDescription     a.b.c  MyTestPackageName appears in my description\n\
+        nixpkgs.MatchMyDescription2  9.8.7  mytestpackageName appears in my description with different capitalization\n\
+        nixpkgs.MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
+        nixpkgs.MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
+        \n\
+        nixos.mytestpackageName3     3.2.1  More test package description, now with MyTestPackageName\n\
+        nixos.MyTestPackageName3     1.2.1  More test package description\n\
+        nixos.MyTestPackageName2     1.0.1\n\
+        nixos.MyTestPackageName1     1.1.0  Another test package description\n\
+        nixpkgs.mytestpackageName3   3.2.1  More test package description, now with MyTestPackageName\n\
+        nixpkgs.MyTestPackageName3   1.2.1  More test package description\n\
+        nixpkgs.MyTestPackageName2   1.0.1\n\
+        nixpkgs.MyTestPackageName1   1.1.0  Another test package description\n\
+        \n\
+        nixos.MyTestPackageName      1.0.0  Test package description\n\
+        nixpkgs.MyTestPackageName    1.0.0  Test package description\n\
+    ";
     let mut cmd = Command::cargo_bin("nps").unwrap();
     cmd.arg("--cache-folder=tests/")
         .arg("--experimental=false")
@@ -370,4 +375,43 @@ fn experimental_cache_creation() {
             !re_channels.is_match(String::from_utf8_lossy(&output.get_output().stdout).as_ref())
         );
     });
+}
+
+#[test]
+fn multi_line() {
+    init();
+
+    let desired_output = "\
+MatchMyDescription1  9.8.7
+    Also here MyTestPackageName appears in my description
+
+MatchMyDescription  a.b.c
+    MyTestPackageName appears in my description
+
+mytestpackageName3  3.2.1
+    More test package description, now with MyTestPackageName
+
+MyTestPackageName3  1.2.1
+    More test package description
+
+MyTestPackageName2  1.0.1
+
+MyTestPackageName1  1.1.0
+    Another test package description
+
+MyTestPackageName  1.0.0
+    Test package description
+";
+    let mut cmd = Command::cargo_bin("nps").unwrap();
+    cmd.arg("-i=false")
+        .arg("--cache-folder=tests/")
+        .arg("--multi-line=true")
+        .arg("--experimental=true")
+        .arg("MyTestPackageName")
+        .arg("-dddd")
+        .env_clear(); // remove env vars
+
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::diff(desired_output));
 }
