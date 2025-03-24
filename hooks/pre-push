@@ -40,7 +40,7 @@ fi
 echo "Checking for tags..."
 if ! [[ $(git tag --points-at HEAD) ]]
 then
-  echo "Create a tag \`cargo release {major,minor,patch,release,rc,beta,alpha} --no-release [--execute]\`"
+  echo "Create a tag \`cargo release {major,minor,patch,release,rc,beta,alpha} --no-publish [--execute]\`"
   exit 1
 fi
 
