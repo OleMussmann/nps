@@ -43,7 +43,7 @@
               clippy # linting
               hyperfine # benchmarking
               nixfmt-rfc-style # code formatting
-              python312Packages.grip # markdown rendering
+              python313Packages.grip # markdown rendering
               rustfmt # code formatting
             ];
           };

@@ -1,4 +1,4 @@
-use assert_cmd::{assert::OutputAssertExt, cargo::CommandCargoExt};
+use assert_cmd::{assert::OutputAssertExt, cargo};
 use predicates::prelude::predicate;
 use regex::Regex;
 use std::{fs, io::Write, process::Command};
@@ -12,7 +12,7 @@ fn init() {
 fn short_help() {
     init();
 
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-h").arg("-dddd");
     cmd.assert().success().stdout(predicate::str::contains(
         "Find SEARCH_TERM in available nix packages and sort results by relevance",
@@ -26,7 +26,7 @@ fn short_help() {
 fn long_help() {
     init();
 
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("--help").arg("-dddd");
     cmd.assert().success().stdout(predicate::str::contains(
         "Use up to four times for increased verbosity",
@@ -40,7 +40,7 @@ fn long_help() {
 fn no_search_term() {
     init();
 
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-dddd");
     cmd.assert().failure().stderr(predicate::str::contains(
         "error: the following required arguments were not provided:
@@ -52,7 +52,7 @@ fn no_search_term() {
 fn too_much_debug() {
     init();
 
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-ddddd").arg("search_term").env_clear();
     cmd.assert()
         .failure()
@@ -74,7 +74,7 @@ fn experimental_output_case_sensitive() {
         \n\
         MyTestPackageName    1.0.0  Test package description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false")
         .arg("--cache-folder=tests/")
         .arg("--experimental=true")
@@ -103,7 +103,7 @@ fn experimental_output() {
         \n\
         MyTestPackageName    1.0.0  Test package description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("--cache-folder=tests/")
         .arg("--experimental=true")
         .arg("MyTestPackageName")
@@ -130,7 +130,7 @@ fn experimental_output_flip_by_command_line_no_equals() {
         MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
         MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false")
         .arg("-f")
         .arg("--cache-folder=tests/")
@@ -159,7 +159,7 @@ fn experimental_output_flip_by_command_line_equals() {
         MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
         MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false")
         .arg("-f=true")
         .arg("--cache-folder=tests/")
@@ -188,7 +188,7 @@ fn experimental_output_flip_by_env_var() {
         MatchMyDescription   a.b.c  MyTestPackageName appears in my description\n\
         MatchMyDescription1  9.8.7  Also here MyTestPackageName appears in my description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false");
     cmd.arg("--cache-folder=tests/")
         .arg("--experimental=true")
@@ -226,7 +226,7 @@ fn output_case_sensitive() {
         nixos.MyTestPackageName      1.0.0  Test package description\n\
         nixpkgs.MyTestPackageName    1.0.0  Test package description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false")
         .arg("--cache-folder=tests/")
         .arg("--experimental=false")
@@ -265,7 +265,7 @@ fn output() {
         nixos.MyTestPackageName      1.0.0  Test package description\n\
         nixpkgs.MyTestPackageName    1.0.0  Test package description\n\
     ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("--cache-folder=tests/")
         .arg("--experimental=false")
         .arg("MyTestPackageName")
@@ -305,7 +305,7 @@ fn cache_creation() {
     tempfile.persist(nix_conf_dir.join("nix.conf")).unwrap();
 
     temp_env::with_var("XDG_CONFIG_HOME", Some(&tempdir.path()), || {
-        let mut cmd = Command::cargo_bin("nps").unwrap();
+        let mut cmd = Command::new(cargo::cargo_bin!("nps"));
         cmd.arg(format!("--cache-folder={}", &temp_path.display()))
             .arg("--experimental=false")
             .arg("-dddd")
@@ -350,7 +350,7 @@ fn experimental_cache_creation() {
         let temp_dir = TempDir::new().unwrap();
         let temp_path = temp_dir.path().to_owned();
 
-        let mut cmd = Command::cargo_bin("nps").unwrap();
+        let mut cmd = Command::new(cargo::cargo_bin!("nps"));
         cmd.arg(format!("--cache-folder={}", &temp_path.display()))
             .arg("--experimental=true")
             .arg("--quiet")
@@ -402,7 +402,7 @@ MyTestPackageName1  1.1.0
 MyTestPackageName  1.0.0
     Test package description
 ";
-    let mut cmd = Command::cargo_bin("nps").unwrap();
+    let mut cmd = Command::new(cargo::cargo_bin!("nps"));
     cmd.arg("-i=false")
         .arg("--cache-folder=tests/")
         .arg("--multi-line=true")

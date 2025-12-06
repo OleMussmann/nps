@@ -11,21 +11,21 @@ readme = "README.md"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.5.32", features = ["derive", "env", "string"] }
-env_logger = "0.11.7"
-grep = "0.3.2"
-home = "0.5.11"
-log = "0.4.27"
-regex = "1.11.1"
-serde = { version = "1.0.219", features = ["derive"] }
-serde_json = "1.0.140"
-tempfile = "3.19.1"
+clap = { version = "4.5.53", features = ["derive", "env", "string"] }
+env_logger = "0.11.8"
+grep = "0.4.1"
+home = "0.5.12"
+log = "0.4.29"
+regex = "1.12.2"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+tempfile = "3.23.0"
 termcolor = "1.4.1"
-terminal_size = "0.4.2"
+terminal_size = "0.4.3"
 unicode-segmentation = "1.12.0"
-unicode-width = "0.2.0"
+unicode-width = "0.2.2"
 
 [dev-dependencies]
-assert_cmd = "2.0.16"
+assert_cmd = "2.1.1"
 predicates = "3.1.3"
 temp-env = "0.3.6"
