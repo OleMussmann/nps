@@ -13,7 +13,33 @@ Find installable packages at lightning speed and sort the result by relevance, s
 
 ![The command `nps avahi` lists all nixpkgs matching `avahi`, sorted by relevance.](https://i.imgur.com/wNnWdxC.png "nps avahi")
 
-## Installation
+## Running via `nixpkgs` Repository (Recommended ⭐)
+This is the safest way to run a well-tested `nps` version from the [official repository](https://search.nixos.org/packages?channel=25.11&show=nps&query=nps).
+
+### Try It Without Installing
+#### Flakes ❄️
+```bash
+nix run nixpkgs#nps -- COMMAND_LINE_OPTIONS
+```
+
+#### No Flakes ☀️
+```bash
+nix --extra-experimental-features "nix-command flakes" run nixpkgs#nps -- COMMAND_LINE_OPTIONS
+```
+
+### Declarative Installation (Recommended ⭐)
+Add `nps` to your `systemPackages` in `configuration.nix`:
+
+```nix
+environment.systemPackages = with pkgs; [
+    nps
+    ...
+];
+```
+
+## Running via GitHub (Bleeding Edge)
+If you want the latest features before they hit `nixpkgs`.
+
 ### Try It Without Installing
 #### Flakes ❄️
 ```bash
@@ -25,7 +51,7 @@ nix run github:OleMussmann/nps -- COMMAND_LINE_OPTIONS
 nix --extra-experimental-features "nix-command flakes" run github:OleMussmann/nps -- COMMAND_LINE_OPTIONS
 ```
 
-### Declarative Installation (Recommended)
+### Declarative Installation (Recommended ⭐)
 #### Flakes ❄️
 > ⚠️ The way of installing third-party flakes is highly dependent on your personal configuration. As far as I know there is no standardized, canonical way to do this. Instead, here is a generic approach via overlays. You will need to adapt it to your config files.
 
@@ -33,7 +59,7 @@ Add `nps` to your inputs:
 
 ```nix
 inputs = {
-  nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+  nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   # Nix Package Search - nps
   nps.url = "github:OleMussmann/nps";
@@ -88,7 +114,7 @@ environment.systemPackages = with pkgs; [
 - Build with `cargo build --release`. Dependencies needed: `gcc`, `cargo`
 - Copy or symlink the `target/release/nps` executable to a folder in your `PATH`, or include it in your `PATH`.
 
-## Automatic Package Scanning (Optional)
+## Automatic Cache Refresh (Optional, Recommended ⭐)
 Instead of running `nps -r` (or `nps -e -r` for using the nix "experimental" features a.k.a flakes) by hand every once in a while to refresh the package cache, or you can set up a systemd timer at regular intervals. If you automate it, make sure to do so with your local user environment.
 
 ```nix
@@ -119,7 +145,7 @@ systemd.services."refresh-nps-cache" = {
 };
 ```
 
-### Testing Automated Package Scanning
+### Testing Automated Cache Refresh
 - Test the service by starting it by hand and checking the logs.
   ```bash
   sudo systemctl start refresh-nps-cache.service
