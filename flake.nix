@@ -22,8 +22,7 @@
         pkgs = import nixpkgs { inherit system; };
         naersk' = pkgs.callPackage naersk { };
       in
-      rec {
-        defaultPackage = packages.default;
+      {
         packages.default = naersk'.buildPackage {
           src = ./.;
           buildInputs = with pkgs; [ nix ];
@@ -42,7 +41,7 @@
               cargo-tarpaulin # code coverage
               clippy # linting
               hyperfine # benchmarking
-              nixfmt-rfc-style # code formatting
+              nixfmt # code formatting
               python313Packages.grip # markdown rendering
               rustfmt # code formatting
             ];
