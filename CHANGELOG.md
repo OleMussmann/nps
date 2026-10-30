@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Changed
+- Update dependencies
+
+### Fixed
+- Remove deprecated `defaultPackage` flake output
+- Remove useless borrows in formatting
+
 ## [0.2.12] - 2025-12-07
 
 ### Fixed
