@@ -122,7 +122,7 @@ fn main() -> ExitCode {
     let content = match fs::read_to_string(&file_path) {
         Ok(content) => content,
         Err(err) => {
-            log::error!("Can't open file {}: {err}", &file_path.display());
+            log::error!("Can't open file {}: {err}", file_path.display());
             return ExitCode::FAILURE;
         }
     };

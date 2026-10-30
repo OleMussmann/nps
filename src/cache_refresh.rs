@@ -205,12 +205,12 @@ pub fn refresh(experimental: bool, file_path: &PathBuf, quiet: bool) -> Result<(
     log::trace!("folder created");
 
     log::trace!("cache_folder: {:?}", cache_folder);
-    log::trace!("file_path: {:?}", &file_path);
+    log::trace!("file_path: {:?}", file_path);
 
     // Atomic Writing: Write first to a tmp file, then persist (move) it to destination
     let tempfile = NamedTempFile::new_in(cache_folder)
         .map_err(|err| format!("Can't create temp file: {err}"))?;
-    log::trace!("tempfile: {:?}", &tempfile);
+    log::trace!("tempfile: {:?}", tempfile);
     log::trace!("trying to write tempfile");
     write!(&tempfile, "{}", cache_content)
         .map_err(|err| format!("Can't write to temp file: {err}"))?;
@@ -226,7 +226,7 @@ pub fn refresh(experimental: bool, file_path: &PathBuf, quiet: bool) -> Result<(
 
     let cache_end_message =
         format!("Done. Cached info of {number_of_packages} packages in {cache_file_path_string}");
-    log::info!("{}", &cache_end_message);
+    log::info!("{}", cache_end_message);
     message(&cache_end_message, quiet)?;
 
     Ok(())

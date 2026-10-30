@@ -347,7 +347,7 @@ pub fn print_matches(
         false => "".to_string(),
     };
     // BufferWriter introduces a newline that we need to trim for some reason
-    writeln!(io::stdout(), "{}", &out.join(&separator).trim())
+    writeln!(io::stdout(), "{}", out.join(&separator).trim())
         .map_err(|err| format!("Can't write to stdout: {err}"))?;
 
     Ok(())
@@ -795,8 +795,8 @@ mod tests {
         // The characters might not render well in an editor. Print them
         // in the terminal to see where it's truncated.
         println!("{}\n", lines);
-        println!("{}\n", &truncated);
-        println!("{}", &expected);
+        println!("{}\n", truncated);
+        println!("{}", expected);
 
         assert_eq!(truncated, expected);
         assert_eq!(truncated_multi_line, expected_multi_line);

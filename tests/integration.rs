@@ -306,7 +306,7 @@ fn cache_creation() {
 
     temp_env::with_var("XDG_CONFIG_HOME", Some(&tempdir.path()), || {
         let mut cmd = Command::new(cargo::cargo_bin!("nps"));
-        cmd.arg(format!("--cache-folder={}", &temp_path.display()))
+        cmd.arg(format!("--cache-folder={}", temp_path.display()))
             .arg("--experimental=false")
             .arg("-dddd")
             .arg("-r");
@@ -351,7 +351,7 @@ fn experimental_cache_creation() {
         let temp_path = temp_dir.path().to_owned();
 
         let mut cmd = Command::new(cargo::cargo_bin!("nps"));
-        cmd.arg(format!("--cache-folder={}", &temp_path.display()))
+        cmd.arg(format!("--cache-folder={}", temp_path.display()))
             .arg("--experimental=true")
             .arg("--quiet")
             .arg("-dddd")
