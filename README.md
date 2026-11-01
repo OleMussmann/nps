@@ -1,4 +1,4 @@
-[![Testing CI](https://github.com/OleMussmann/nps/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/OleMussmann/nps/actions/workflows/test.yml) [![CodeCov](https://codecov.io/gh/OleMussmann/nps/graph/badge.svg?token=1QLZ9AG8N1)](https://codecov.io/gh/OleMussmann/nps)
+[![Testing CI](https://github.com/OleMussmann/nps/actions/workflows/test.yml/badge.svg?branch=development)](https://github.com/OleMussmann/nps/actions/workflows/test.yml) [![CodeCov](https://codecov.io/gh/OleMussmann/nps/graph/badge.svg?token=1QLZ9AG8N1)](https://codecov.io/gh/OleMussmann/nps) [![License](https://img.shields.io/github/license/OleMussmann/nps)](LICENSE) [![Latest release](https://img.shields.io/github/v/release/OleMussmann/nps)](https://github.com/OleMussmann/nps/releases) [![nixpkgs unstable package](https://repology.org/badge/version-for-repo/nix_unstable/nps-nix-package-list-tool.svg)](https://repology.org/project/nps-nix-package-list-tool/versions)
 
 # Nix Package Search - `nps`
 Cache the nix package list, query and sort by relevance.
