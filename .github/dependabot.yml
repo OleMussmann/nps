@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: development
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: cargo
+    directory: /
+    target-branch: development
+    schedule:
+      interval: monthly
+    groups:
+      cargo-all:
+        applies-to: version-updates
+
+  - package-ecosystem: nix
+    directory: /
+    target-branch: development
+    schedule:
+      interval: monthly
