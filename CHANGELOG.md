@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+## [0.2.14] - 2026-11-01
+
 ### Security
 - Pin GitHub Actions to commit SHAs
 - Restrict `GITHUB_TOKEN` permissions
@@ -186,7 +188,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Versioning now adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 <!-- next-url -->
-[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.13...development
+[Unreleased]: https://github.com/OleMussmann/nps/compare/v0.2.14...development
+[0.2.14]: https://github.com/OleMussmann/nps/compare/v0.2.13...v0.2.14
 [0.2.13]: https://github.com/OleMussmann/nps/compare/v0.2.12...v0.2.13
 [0.2.12]: https://github.com/OleMussmann/nps/compare/v0.2.11...v0.2.12
 [0.2.11]: https://github.com/OleMussmann/nps/compare/v0.2.10...v0.2.11
