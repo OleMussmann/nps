@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - ReleaseDate
 
+### Security
+- Pin GitHub Actions to commit SHAs
+- Restrict `GITHUB_TOKEN` permissions
+- Stop persisting git credentials in CI checkouts
+- Validate release tag format in the release workflow
+
+### Added
+- Dependabot updates for GitHub Actions, Cargo, and Nix flake inputs
+
+### Changed
+- Update dependencies
+- Create release drafts only when a PR to `main` is merged
+- Switch `flake-compat` to the official `NixOS/flake-compat` repository
+- Point CI badge at the `development` branch; add release, license, and nixpkgs badges to `README.md`
+
 ## [0.2.13] - 2026-10-30
 
 ### Changed
