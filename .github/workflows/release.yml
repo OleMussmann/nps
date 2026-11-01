@@ -22,6 +22,7 @@ jobs:
         run: |
           TAG=$(grep "## \[" CHANGELOG.md | head -n 2 | tail -n 1 | sed "s/^## \\[\(.*\)\\].*/\1/")
           echo "Tag: '${TAG}'"
+          echo "$TAG" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$' || { echo "Invalid tag: '$TAG'"; exit 1; }
           sed -e "/^## \\[${TAG}\\]/,/^## / ! d" CHANGELOG.md | head -n -2 > RELEASE.md
           echo >> RELEASE.md
           sed -e "/^\\[${TAG}\\]: / ! d;s/^\\[${TAG}\\]: \(.*\)/**Full Changelog**: \1/" CHANGELOG.md >> RELEASE.md
@@ -32,6 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG=$(grep "## \[" CHANGELOG.md | head -n 2 | tail -n 1 | sed "s/^## \\[\(.*\)\\].*/\1/")
+          echo "$TAG" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$' || { echo "Invalid tag: '$TAG'"; exit 1; }
           gh release create v"$TAG" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} v${TAG#v}" \
