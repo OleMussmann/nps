@@ -61,13 +61,13 @@ git config core.hooksPath hooks
     cargo release [LEVEL|VERSION] --execute --no-publish
     ```
 
-1. Create a pull request (PR) for the `development` branch into `main`. A release draft will be created from [CHANGELOG.md](CHANGELOG.md).
+1. Create a pull request (PR) for the `development` branch into `main`.
 
 1. If all pre-checks succeed, conclude the pull request by commenting
     ```
     /fast-forward
     ```
-    in the PR conversation, see [below](#merge-onto-main) for an explanation.
+    in the PR conversation, see [below](#merge-onto-main) for an explanation. Merging triggers the creation of a release draft from [CHANGELOG.md](CHANGELOG.md).
 
 1. Review the release draft under "Releases" and publish the release.
 
