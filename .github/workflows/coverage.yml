@@ -46,7 +46,7 @@ jobs:
           RUST_LOG=TRACE cargo-tarpaulin --engine llvm --verbose --all-features --workspace --timeout 360 --out xml --follow-exec -- --include-ignored
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
